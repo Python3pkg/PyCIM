@@ -57,13 +57,13 @@ def cimwrite(d, source, encoding="utf-8"):
     nsCIM = nsURI if nsURI[-1] == "#" else nsURI + "#"
 
     # Start the root RDF element and declare namespaces.
-    xmlns = {u"xmlns:%s" % nsPrefixRDF: nsRDF, u"xmlns:%s" % nsPrefix: nsCIM}
-    rdf = w.start(u"%s:RDF" % nsPrefixRDF, xmlns)
+    xmlns = {"xmlns:%s" % nsPrefixRDF: nsRDF, "xmlns:%s" % nsPrefix: nsCIM}
+    rdf = w.start("%s:RDF" % nsPrefixRDF, xmlns)
 
     # Iterate over all UUID, CIM object pairs in the given dictionary.
-    for uuid, obj in d.items():
-        w.start(u"%s:%s" % (nsPrefix, obj.__class__.__name__),
-                {u"%s:ID" % nsPrefixRDF: obj.UUID})
+    for uuid, obj in list(d.items()):
+        w.start("%s:%s" % (nsPrefix, obj.__class__.__name__),
+                {"%s:ID" % nsPrefixRDF: obj.UUID})
 
         mro = obj.__class__.mro()
         mro.reverse()
@@ -74,7 +74,7 @@ def cimwrite(d, source, encoding="utf-8"):
             for attr in attrs:
                 val = getattr(obj, attr)
                 if val != klass._defaults[attr]:
-                    w.element(u"%s:%s.%s" % (nsPrefix, klass.__name__, attr),
+                    w.element("%s:%s.%s" % (nsPrefix, klass.__name__, attr),
                               str(val))
 
         # Serialise enumeration data-types.
@@ -83,9 +83,9 @@ def cimwrite(d, source, encoding="utf-8"):
             for enum in enums:
                 val = getattr(obj, enum)
                 dt = klass._enums[enum]
-                w.element(u"%s:%s.%s" % (nsPrefix, klass.__name__, enum),
-                          attrib={u"%s:resource" % nsPrefixRDF:
-                                  u"%s%s.%s" % (nsCIM, dt, val)})
+                w.element("%s:%s.%s" % (nsPrefix, klass.__name__, enum),
+                          attrib={"%s:resource" % nsPrefixRDF:
+                                  "%s%s.%s" % (nsCIM, dt, val)})
 
         # Serialise references.
         for klass in mro[2:]: # skip 'object' and 'Element'
@@ -94,9 +94,9 @@ def cimwrite(d, source, encoding="utf-8"):
             for ref in refs:
                 val = getattr(obj, ref)
                 if val is not None:
-                    w.element(u"%s:%s.%s" % (nsPrefix, klass.__name__, ref),
-                          attrib={u"%s:resource" % nsPrefixRDF:
-                                  u"#%s" % val.UUID})
+                    w.element("%s:%s.%s" % (nsPrefix, klass.__name__, ref),
+                          attrib={"%s:resource" % nsPrefixRDF:
+                                  "#%s" % val.UUID})
 
         w.end()
 
@@ -110,8 +110,8 @@ def cimwrite(d, source, encoding="utf-8"):
 
 
 if __name__ == "__main__":
-    from RDFXMLReader import cimread
-    from PrettyPrintXML import xmlpp
+    from .RDFXMLReader import cimread
+    from .PrettyPrintXML import xmlpp
 
     logging.basicConfig(level=logging.INFO)
 
@@ -120,4 +120,4 @@ if __name__ == "__main__":
     tmp = "/tmp/cimwrite.xml"
     cimwrite(d, tmp)
 
-    print(xmlpp(tmp))
+    print((xmlpp(tmp)))

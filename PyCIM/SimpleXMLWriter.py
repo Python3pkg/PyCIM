@@ -90,7 +90,7 @@
 import re, sys, string
 
 try:
-    unicode("")
+    str("")
 except NameError:
     def encode(s, encoding):
         # 1.5.2: application must use the right encoding

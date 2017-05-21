@@ -211,7 +211,7 @@ def cimread(source, packageMap=None, nsURI=None, start_dict=None):
         root.clear()
 
     if logger_errors_grouped:
-        for error, count in logger_errors_grouped.items():
+        for error, count in list(logger_errors_grouped.items()):
             logging_message = '%s : %d times' %(error, count)
             logger.warn(logging_message)
 

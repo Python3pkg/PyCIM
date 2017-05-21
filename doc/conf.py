@@ -42,8 +42,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'PyCIM'
-copyright = u'2011, Richard Lincoln'
+project = 'PyCIM'
+copyright = '2011, Richard Lincoln'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -177,8 +177,8 @@ htmlhelp_basename = 'PyCIMdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'PyCIM.tex', u'PyCIM Documentation',
-   u'Richard Lincoln', 'manual'),
+  ('index', 'PyCIM.tex', 'PyCIM Documentation',
+   'Richard Lincoln', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

@@ -40,7 +40,7 @@ CONN_FILE = join(dirname(__file__), "Data", "EDF_AIGUE_v9_CONN.xml")
 EQUIP_FILE = join(dirname(__file__), "Data", "EDF_AIGUE_v9_EQUIP.xml")
 GEO_FILE = join(dirname(__file__), "Data", "EDF_AIGUE_v9_GEO.xml")
 
-EMPTY_CIM = u'''<?xml version=\'1.0\'?>
+EMPTY_CIM = '''<?xml version=\'1.0\'?>
 <rdf:RDF xmlns:cim="http://iec.ch/TC57/2010/CIM-schema-cim15#"
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />'''
 
